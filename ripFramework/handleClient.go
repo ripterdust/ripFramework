@@ -4,19 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"strings"
+	"ripframework/ripFramework/util"
 )
-
-func getHttpVerb(request string) string {
-
-	splitText := strings.Fields(request)
-
-	if len(splitText) > 0 {
-		return splitText[0]
-	}
-
-	return ""
-}
 
 func (f *Framework) handleClient(conn net.Conn) {
 	defer conn.Close()
@@ -30,9 +19,11 @@ func (f *Framework) handleClient(conn net.Conn) {
 
 	request := string(buffer[:clientRequest])
 
-	verb := getHttpVerb(request)
+	verb := util.GetHttpVerb(request)
 
-	fmt.Println(verb)
+	uri := util.GetUri(request)
+
+	fmt.Println(verb, uri)
 	response := "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"age\": 12}"
 
 	_, err = conn.Write([]byte(response))
