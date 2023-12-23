@@ -3,13 +3,12 @@ package ripframework
 import (
 	"fmt"
 	"net"
-	"ripframework/ripFramework/verbs"
+	"ripframework/ripFramework/constants"
 )
-
-type handleFunction func(string) interface{}
 
 type Framework struct {
 	handlers map[string]map[string]handleFunction
+	status   string
 }
 
 /*
@@ -23,19 +22,23 @@ func New() *Framework {
 		handlers: make(map[string]map[string]handleFunction),
 	}
 
-	for _, httpVerb := range verbs.VERBS {
+	for _, httpVerb := range constants.VERBS {
 		framework.handlers[httpVerb] = make(map[string]handleFunction)
 	}
 
 	return framework
 }
 
+/*
+	@param port string -> port were server is going to be listening
+*/
+
 func (f *Framework) Listen(port string) {
 
 	listener, err := net.Listen("tcp", "localhost:"+port)
 
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("Error ->", err)
 
 		return
 	}
@@ -48,7 +51,7 @@ func (f *Framework) Listen(port string) {
 		conn, err := listener.Accept()
 
 		if err != nil {
-			fmt.Println("Error:", err)
+			fmt.Println("Error -> ", err)
 			continue
 		}
 

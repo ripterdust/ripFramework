@@ -1,4 +1,4 @@
-package verbs
+package constants
 
 const (
 	GET    = "GET"

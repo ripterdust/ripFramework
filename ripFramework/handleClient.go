@@ -18,9 +18,7 @@ func (f *Framework) handleClient(conn net.Conn) {
 	}
 
 	request := string(buffer[:clientRequest])
-
 	verb := util.GetHttpVerb(request)
-
 	uri := util.GetUri(request)
 
 	fmt.Println(verb, uri)
