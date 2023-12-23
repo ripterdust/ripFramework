@@ -11,3 +11,7 @@ func New() *Responser {
 
 	return responser
 }
+
+func (r *Responser) Json(json interface{}) {
+
+}

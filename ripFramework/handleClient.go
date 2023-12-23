@@ -3,6 +3,8 @@ package ripframework
 import (
 	"log"
 	"net"
+	"ripframework/ripFramework/requester"
+	"ripframework/ripFramework/responser"
 	"ripframework/ripFramework/util"
 )
 
@@ -29,10 +31,14 @@ func (f *Framework) handleClient(conn net.Conn) {
 		return
 	}
 
-	response := "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"age\": 12}"
+	responser := responser.New()
+	requester := requester.New()
 
-	_, err = conn.Write([]byte(response))
-	if err != nil {
-		log.Printf("Error -> %v", err)
-	}
+	handler(requester, responser)
+	// response := "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"age\": 12}"
+
+	// _, err = conn.Write([]byte(response))
+	// if err != nil {
+	// 	log.Printf("Error -> %v", err)
+	// }
 }

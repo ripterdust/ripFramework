@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
 	ripframework "ripframework/ripFramework"
+	"ripframework/ripFramework/requester"
+	"ripframework/ripFramework/responser"
 )
 
-func getHandler(uri string) interface{} {
-	fmt.Println("Handler para:", uri)
+func getHandler(request *requester.Requester, response *responser.Responser) {
 
-	return ""
+	response.Json("Request")
 }
 
 func main() {

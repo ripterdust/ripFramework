@@ -1,3 +1,8 @@
 package ripframework
 
-type handleFunction func(string) interface{}
+import (
+	"ripframework/ripFramework/requester"
+	"ripframework/ripFramework/responser"
+)
+
+type handleFunction func(*requester.Requester, *responser.Responser)
