@@ -31,7 +31,7 @@ func (f *Framework) handleClient(conn net.Conn) {
 		return
 	}
 
-	responser := responser.New(&conn)
+	responser := responser.New(conn)
 	requester := requester.New()
 
 	handler(requester, responser)
