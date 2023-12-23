@@ -35,10 +35,4 @@ func (f *Framework) handleClient(conn net.Conn) {
 	requester := requester.New()
 
 	handler(requester, responser)
-	// response := "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"age\": 12}"
-
-	// _, err = conn.Write([]byte(response))
-	// if err != nil {
-	// 	log.Printf("Error -> %v", err)
-	// }
 }

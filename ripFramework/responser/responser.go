@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"ripframework/ripFramework/constants"
+	"strconv"
 )
 
 type Responser struct {
@@ -27,12 +28,18 @@ func (r *Responser) Json(jsonElement interface{}) {
 		return
 	}
 
-	response := fmt.Sprintf("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n%s", jsonBytes)
+	status := strconv.Itoa(r.status)
+	response := fmt.Sprintf("HTTP/1.1 %s \r\nContent-Type: application/json\r\n\r\n%s", status, string(jsonBytes))
+
+	r.Status(constants.HTTP_SUCCESS)
 
 	_, err = r.conn.Write([]byte(response))
 
 	if err != nil {
 		fmt.Println("Error -> ", err)
 	}
+}
 
+func (r *Responser) Status(status int) {
+	r.status = status
 }
