@@ -3,17 +3,28 @@ package ripframework
 import (
 	"fmt"
 	"net"
+	"ripframework/ripFramework/verbs"
 )
 
+type handleFunction func(string) interface{}
+
 type Framework struct {
+	handlers map[string]map[string]handleFunction
 }
 
 func New() *Framework {
-	framework := &Framework{}
+	framework := &Framework{
+		handlers: make(map[string]map[string]handleFunction),
+	}
 
+	framework.handlers[verbs.GET] = make(map[string]handleFunction)
+	framework.handlers[verbs.POST] = make(map[string]handleFunction)
+	framework.handlers[verbs.DELETE] = make(map[string]handleFunction)
+	framework.handlers[verbs.PUT] = make(map[string]handleFunction)
+
+	fmt.Println(framework)
 	return framework
 }
-
 func (f *Framework) Listen(port string) {
 
 	listener, err := net.Listen("tcp", "localhost:"+port)
