@@ -17,12 +17,10 @@ func New() *Framework {
 		handlers: make(map[string]map[string]handleFunction),
 	}
 
-	framework.handlers[verbs.GET] = make(map[string]handleFunction)
-	framework.handlers[verbs.POST] = make(map[string]handleFunction)
-	framework.handlers[verbs.DELETE] = make(map[string]handleFunction)
-	framework.handlers[verbs.PUT] = make(map[string]handleFunction)
+	for _, httpVerb := range verbs.VERBS {
+		framework.handlers[httpVerb] = make(map[string]handleFunction)
+	}
 
-	fmt.Println(framework)
 	return framework
 }
 func (f *Framework) Listen(port string) {

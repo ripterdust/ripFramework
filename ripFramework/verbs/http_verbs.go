@@ -6,3 +6,5 @@ const (
 	PUT    = "PUT"
 	DELETE = "DELETE"
 )
+
+var VERBS = []string{GET, POST, PUT, DELETE}
