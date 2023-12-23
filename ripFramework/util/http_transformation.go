@@ -1,6 +1,9 @@
 package util
 
-import "strings"
+import (
+	"encoding/json"
+	"strings"
+)
 
 func GetHttpVerb(request string) string {
 
@@ -22,4 +25,12 @@ func GetUri(request string) string {
 	}
 
 	return ""
+}
+
+func MapToJSON(data map[string]interface{}) (string, error) {
+	jsonBytes, err := json.Marshal(data)
+	if err != nil {
+		return "", err
+	}
+	return string(jsonBytes), nil
 }

@@ -8,7 +8,7 @@ import (
 
 type Framework struct {
 	handlers map[string]map[string]handleFunction
-	status   string
+	status   int
 }
 
 /*
@@ -20,6 +20,7 @@ type Framework struct {
 func New() *Framework {
 	framework := &Framework{
 		handlers: make(map[string]map[string]handleFunction),
+		status:   constants.HTTP_SUCCESS,
 	}
 
 	for _, httpVerb := range constants.VERBS {
@@ -30,16 +31,13 @@ func New() *Framework {
 }
 
 /*
-	@param port string -> port were server is going to be listening
+@param port string -> port were server is going to be listening
 */
-
 func (f *Framework) Listen(port string) {
-
 	listener, err := net.Listen("tcp", "localhost:"+port)
 
 	if err != nil {
 		fmt.Println("Error ->", err)
-
 		return
 	}
 
@@ -47,6 +45,7 @@ func (f *Framework) Listen(port string) {
 
 	fmt.Println("Server listening on port " + port)
 
+	fmt.Println(f.handlers)
 	for {
 		conn, err := listener.Accept()
 

@@ -1,8 +1,12 @@
 package ripframework
 
-import "ripframework/ripFramework/constants"
+import (
+	"ripframework/ripFramework/constants"
+)
 
-func (f *Framework) setRoute(verb string, uri string, handler handleFunction) {}
+func (f *Framework) setRoute(verb string, uri string, handler handleFunction) {
+	f.handlers[verb][uri] = handler
+}
 
 func (f *Framework) Get(uri string, handler handleFunction) {
 	f.setRoute(constants.GET, uri, handler)
