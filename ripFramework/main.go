@@ -12,6 +12,12 @@ type Framework struct {
 	handlers map[string]map[string]handleFunction
 }
 
+/*
+	@instance Framework
+	@return Framework instance with httpMethod handlers
+	@create handlers hash map
+*/
+
 func New() *Framework {
 	framework := &Framework{
 		handlers: make(map[string]map[string]handleFunction),
@@ -23,6 +29,7 @@ func New() *Framework {
 
 	return framework
 }
+
 func (f *Framework) Listen(port string) {
 
 	listener, err := net.Listen("tcp", "localhost:"+port)
